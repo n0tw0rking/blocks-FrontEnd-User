@@ -59,13 +59,10 @@ export class AuthService {
             this.user = res.data.login.userId;
             this.isSuperAdmin = res.data.login.isSuperAdmin;
             this.isAdmin = res.data.login.isAdmin;
-            if (this.isSuperAdmin || this.isAdmin) {
-              this.saveTokenAndCurrentUser(res.data.login.token);
-            }
-          }
 
+            this.saveTokenAndCurrentUser(res.data.login.token);
+          }
           return res;
-          // return this.saveTokenAndCurrentUser(res.data.login.token);
         })
       );
   }

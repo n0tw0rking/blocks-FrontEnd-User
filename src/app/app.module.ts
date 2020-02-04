@@ -9,12 +9,18 @@ import { MainPageComponent } from "./modules/main-page/main-page.component";
 import { AppRoutingModule } from "./app-routing.module";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { GraphQLModule } from "./graphql.module";
+import { TokenInterceptor } from "./core/token-interceptor.service";
+import { HTTP_INTERCEPTORS } from "@angular/common/http";
+import { AuthService } from "./core/auth.service";
+import { AuthGuard } from "./core/auth.guard";
+import { NavbarComponent } from './modules/navbar/navbar.component';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     DashBoardComponent,
-    MainPageComponent
+    MainPageComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +31,16 @@ import { GraphQLModule } from "./graphql.module";
     BrowserAnimationsModule,
     GraphQLModule
   ],
-  providers: [],
+  providers: [
+    AuthService,
+    AuthGuard,
+
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
