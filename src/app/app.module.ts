@@ -13,7 +13,7 @@ import { TokenInterceptor } from "./core/token-interceptor.service";
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import { AuthService } from "./core/auth.service";
 import { AuthGuard } from "./core/auth.guard";
-import { NavbarComponent } from './modules/navbar/navbar.component';
+import { NavbarComponent } from "./modules/navbar/navbar.component";
 @NgModule({
   declarations: [
     AppComponent,
