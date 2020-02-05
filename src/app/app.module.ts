@@ -14,13 +14,15 @@ import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import { AuthService } from "./core/auth.service";
 import { AuthGuard } from "./core/auth.guard";
 import { NavbarComponent } from "./modules/navbar/navbar.component";
+import { SubscriptionComponent } from './modules/subscription/subscription.component';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     DashBoardComponent,
     MainPageComponent,
-    NavbarComponent
+    NavbarComponent,
+    SubscriptionComponent
   ],
   imports: [
     BrowserModule,
