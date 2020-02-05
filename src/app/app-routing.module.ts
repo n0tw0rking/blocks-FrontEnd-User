@@ -9,7 +9,7 @@ const routes: Routes = [
   // { path: "super", component: SuperAdminComponent, canActivate: [AuthGuard] },
 
   { path: "login", component: LoginComponent },
-  { path: "", component: MainPageComponent },
+  { path: "", component: MainPageComponent, canActivate: [AuthGuard] },
   { path: "dash", component: DashBoardComponent, canActivate: [AuthGuard] }
   // // { path:'user', component: UserComponent,  canActivate:[AuthGuard] ,
   // {
