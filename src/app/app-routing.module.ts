@@ -5,12 +5,19 @@ import { AuthGuard } from "./core/auth.guard";
 import { LoginComponent } from "./modules/login/login.component";
 import { DashBoardComponent } from "./modules/dash-board/dash-board.component";
 import { MainPageComponent } from "./modules/main-page/main-page.component";
+import { SubscriptionComponent } from "./modules/subscription/subscription.component";
 const routes: Routes = [
   // { path: "super", component: SuperAdminComponent, canActivate: [AuthGuard] },
 
   { path: "login", component: LoginComponent },
-  { path: "", component: MainPageComponent, canActivate: [AuthGuard] },
-  { path: "dash", component: DashBoardComponent, canActivate: [AuthGuard] }
+  { path: "", component: MainPageComponent },
+  { path: "dash", component: DashBoardComponent, canActivate: [AuthGuard] },
+  {
+    path: "subscription",
+    component: SubscriptionComponent,
+    canActivate: [AuthGuard]
+  }
+
   // // { path:'user', component: UserComponent,  canActivate:[AuthGuard] ,
   // {
   //   path: "user",

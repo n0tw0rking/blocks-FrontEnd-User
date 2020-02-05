@@ -20,6 +20,7 @@ export class ApolloService {
             password
             userSubscription {
               _id
+              name
               user {
                 _id
               }
@@ -64,6 +65,7 @@ export class ApolloService {
         query($name: String!) {
           oneSubscription(name: $name) {
             _id
+
             block {
               _id
             }
