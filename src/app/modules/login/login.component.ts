@@ -77,6 +77,7 @@ export class LoginComponent implements OnInit {
                 this.auth.logout();
               } else {
                 console.log(res.data);
+
                 this.router.navigate(["/"]);
               }
             },
