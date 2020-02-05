@@ -16,7 +16,7 @@ export class AppComponent {
 
     if (!signInData) {
       console.log(signInData);
-      this.router.navigate(["login"]);
+      // this.router.navigate(["login"]);
     }
   }
 }

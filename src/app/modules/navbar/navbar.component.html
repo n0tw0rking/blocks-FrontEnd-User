@@ -50,6 +50,11 @@
         <a class="nav-link" routerLink="/dash">DashBoard</a>
       </li>
       <li class="nav-item ">
+        <a class="nav-link " [hidden]="!onLogin()" routerLink="/subscription"
+          >Subscription</a
+        >
+      </li>
+      <li class="nav-item ">
         <a
           class="nav-link  "
           [hidden]="!onLogin()"
@@ -58,23 +63,10 @@
           >Logout</a
         >
       </li>
+
       <li class="nav-item ">
         <a class="nav-link " [hidden]="isAuthed" routerLink="/login">Login</a>
       </li>
-      <!-- <li class="nav-item ">
-        <a
-          class="nav-link  "
-          *ngIf="isAuthed; else login"
-          routerLink="/login"
-          (click)="onLogout()"
-          >Logout</a
-        >
-      </li>
-      <ng-template #login>
-        <li class="nav-item ">
-          <a class="nav-link  " routerLink="/login">Login</a>
-        </li>
-      </ng-template> -->
     </ul>
   </div>
 </nav>
