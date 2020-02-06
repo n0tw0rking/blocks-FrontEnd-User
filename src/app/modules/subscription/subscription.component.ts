@@ -25,4 +25,7 @@ export class SubscriptionComponent implements OnInit {
       }
     );
   }
+  selectSub(sub) {
+    console.log(sub);
+  }
 }
