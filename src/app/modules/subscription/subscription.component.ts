@@ -35,6 +35,7 @@ export class SubscriptionComponent implements OnInit {
   selectSub(subscription) {
     console.log(subscription);
     this.sub.sub = subscription;
+    this.sub.status = true;
     this.router.navigate(["/dash"]);
   }
 }

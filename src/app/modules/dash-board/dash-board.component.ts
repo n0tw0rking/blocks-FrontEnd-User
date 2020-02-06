@@ -11,7 +11,8 @@ export class DashBoardComponent implements OnInit {
   data: any = {};
   arr: any = [];
   subscription: any;
-  status: boolean;
+
+  // status: boolean;
   public currentUser = localStorage.getItem("currentUser");
   constructor(
     private apollo: ApolloService,
@@ -21,14 +22,10 @@ export class DashBoardComponent implements OnInit {
 
   ngOnInit() {
     if (this.sub.sub === undefined) {
-      console.log("99999999999");
-      this.status = false;
+      this.sub.status = false;
     } else {
       this.subscription = this.sub.sub;
-      console.log("!!!!!!!");
-      console.log(this.subscription);
-      console.log("!!!!!!!");
-      this.status = true;
+      this.sub.status = true;
     }
 
     this.apollo.getUser(this.currentUser).subscribe(

@@ -1,38 +1,6 @@
-<!-- <div class="container">
-  <div class="row">
-    <div class="col mt-3">
-      <p>main-page works!</p>
-      <h3>ID : {{ data._id }}</h3>
-      <h3>Email : {{ data.email }}</h3>
-      <h3>subscripation : {{ arr[0]._id }}</h3>
-      <h3>block : {{ arr[0].block.name }}</h3>
-      <h3>location : {{ arr[0].block.location }}</h3>
-    </div>
-  </div>
-</div> -->
 <div class="container">
   <div class="row">
-    <div class="col">
-      <div class="card" style="width: 18rem;">
-        <img
-          class="card-img-top"
-          src="https://previews.123rf.com/images/panyamail/panyamail1809/panyamail180900343/109879063-user-avatar-icon-sign-profile-symbol.jpg"
-          alt="Card image cap"
-        />
-        <div class="card-body">
-          <h5 class="card-title">Sub Name : {{ arr[0]?.name }}</h5>
-          <h5 class="card-title">Block Name : {{ arr[0]?.block.name }}</h5>
-          <h5 class="card-title">Location : {{ arr[0]?.block.location }}</h5>
-          <p class="card-text">
-            For more information click the button below
-          </p>
-          <div class="text-center">
-            <a href="#" class="btn btn-primary  ">Select</a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col" *ngIf="status">
+    <div class="col" *ngIf="sub.status; else g">
       <div class="card" style="width: 18rem;">
         <img
           class="card-img-top"
@@ -50,11 +18,29 @@
           <p class="card-text">
             For more information click the button below
           </p>
-          <div class="text-center">
-            <a class="btn btn-primary  ">Select</a>
-          </div>
         </div>
       </div>
     </div>
+
+    <ng-template #g>
+      <div class="col">
+        <div class="card" style="width: 18rem;">
+          <img
+            class="card-img-top"
+            src="https://previews.123rf.com/images/panyamail/panyamail1809/panyamail180900343/109879063-user-avatar-icon-sign-profile-symbol.jpg"
+            alt="Card image cap"
+          />
+          <div class="card-body">
+            <h5 class="card-title">Sub Name : {{ arr[0]?.name }}</h5>
+            <h5 class="card-title">Block Name : {{ arr[0]?.block.name }}</h5>
+            <h5 class="card-title">Location : {{ arr[0]?.block.location }}</h5>
+            <p class="card-text">
+              For more information click the button below
+            </p>
+            <p>welcom : {{ sub.status }}</p>
+          </div>
+        </div>
+      </div>
+    </ng-template>
   </div>
 </div>

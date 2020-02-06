@@ -5,5 +5,7 @@ import { Injectable } from "@angular/core";
 })
 export class SubscriptionService {
   sub;
+  status: boolean;
+
   constructor() {}
 }
