@@ -12,9 +12,11 @@ import { GraphQLModule } from "./graphql.module";
 import { TokenInterceptor } from "./core/token-interceptor.service";
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import { AuthService } from "./core/auth.service";
+import { SubscriptionService } from "./core/subscription.service";
+import { ApolloService } from "./core/apollo.service";
 import { AuthGuard } from "./core/auth.guard";
 import { NavbarComponent } from "./modules/navbar/navbar.component";
-import { SubscriptionComponent } from './modules/subscription/subscription.component';
+import { SubscriptionComponent } from "./modules/subscription/subscription.component";
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,9 +36,10 @@ import { SubscriptionComponent } from './modules/subscription/subscription.compo
     GraphQLModule
   ],
   providers: [
+    ApolloService,
+    SubscriptionService,
     AuthService,
     AuthGuard,
-
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,

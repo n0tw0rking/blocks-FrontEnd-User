@@ -1,5 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { ApolloService } from "../../core/apollo.service";
+import { SubscriptionService } from "../../core/subscription.service";
+import { Router } from "@angular/router";
+
 @Component({
   selector: "app-subscription",
   templateUrl: "./subscription.component.html",
@@ -9,7 +12,11 @@ export class SubscriptionComponent implements OnInit {
   data: any = {};
   arr: any = [];
   public currentUser = localStorage.getItem("currentUser");
-  constructor(private apollo: ApolloService) {}
+  constructor(
+    private apollo: ApolloService,
+    private sub: SubscriptionService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.apollo.getUser(this.currentUser).subscribe(
@@ -24,5 +31,11 @@ export class SubscriptionComponent implements OnInit {
         console.log(err);
       }
     );
+  }
+  selectSub(subscription) {
+    console.log(subscription);
+    this.sub.sub = subscription;
+    this.sub.status = true;
+    this.router.navigate(["/dash"]);
   }
 }
