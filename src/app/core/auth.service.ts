@@ -4,6 +4,7 @@ import { Observable } from "rxjs";
 import { environment } from "../../environments/environment";
 import { map } from "rxjs/operators";
 import { Router } from "@angular/router";
+import { SubscriptionService } from "../core/subscription.service";
 // import { ApolloService } from "./apollo.service";
 import { Apollo } from "apollo-angular";
 import gql from "graphql-tag";
@@ -25,7 +26,8 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private router: Router,
-    private apollo: Apollo // private apollo: ApolloService
+    private apollo: Apollo, // private apollo: ApolloService
+    private sub: SubscriptionService
   ) {
     console.log(this.isAuthed);
     this.getIsAuthed.emit(this.isAuthed);
@@ -71,6 +73,8 @@ export class AuthService {
     localStorage.removeItem("token");
     localStorage.removeItem("currentUser");
     this.isAuthed = false;
+    // this.sub.status = false;
+    this.sub.sub = undefined;
     this.router.navigate(["/login"]);
     this.getIsAuthed.emit(this.isAuthed);
   }

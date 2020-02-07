@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { ApolloService } from "../../core/apollo.service";
 import { AuthService } from "../../core/auth.service";
+import { SubscriptionService } from "../../core/subscription.service";
 @Component({
   selector: "app-dash-board",
   templateUrl: "./dash-board.component.html",
@@ -9,10 +10,24 @@ import { AuthService } from "../../core/auth.service";
 export class DashBoardComponent implements OnInit {
   data: any = {};
   arr: any = [];
+  subscription: any;
+
+  // status: boolean;
   public currentUser = localStorage.getItem("currentUser");
-  constructor(private apollo: ApolloService, private auth: AuthService) {}
+  constructor(
+    private apollo: ApolloService,
+    private auth: AuthService,
+    private sub: SubscriptionService
+  ) {}
 
   ngOnInit() {
+    if (this.sub.sub === undefined) {
+      this.sub.status = false;
+    } else {
+      this.subscription = this.sub.sub;
+      this.sub.status = true;
+    }
+
     this.apollo.getUser(this.currentUser).subscribe(
       res => {
         //only user with the subscription can loged in so its even for the admin with subscription
