@@ -40,7 +40,7 @@ export class ApolloService {
     }).valueChanges;
   }
 
-  getService(): any {
+  getService(serviceNAme): any {
     return this.apollo.watchQuery<any>({
       query: gql`
         query($name: String!) {
@@ -53,13 +53,13 @@ export class ApolloService {
         }
       `,
       variables: {
-        name: "water"
+        name: serviceNAme
       },
       errorPolicy: "all"
     }).valueChanges;
   }
 
-  getSubscription(): any {
+  getSubscription(subName): any {
     return this.apollo.watchQuery<any>({
       query: gql`
         query($name: String!) {
@@ -69,11 +69,32 @@ export class ApolloService {
             block {
               _id
             }
+            service {
+              _id
+              name
+            }
           }
         }
       `,
       variables: {
-        name: "BBB"
+        name: subName
+      },
+      errorPolicy: "all"
+    }).valueChanges;
+  }
+
+  getBlockSubs(blockName) {
+    return this.apollo.watchQuery<any>({
+      query: gql`
+        query($name: String!) {
+          oneBlockSubs(name: $name) {
+            _id
+            name
+          }
+        }
+      `,
+      variables: {
+        name: blockName
       },
       errorPolicy: "all"
     }).valueChanges;

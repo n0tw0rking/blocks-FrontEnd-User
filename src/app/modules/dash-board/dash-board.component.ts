@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { ApolloService } from "../../core/apollo.service";
 import { AuthService } from "../../core/auth.service";
 import { SubscriptionService } from "../../core/subscription.service";
+import { ThrowStmt } from "@angular/compiler";
 @Component({
   selector: "app-dash-board",
   templateUrl: "./dash-board.component.html",
@@ -10,6 +11,8 @@ import { SubscriptionService } from "../../core/subscription.service";
 export class DashBoardComponent implements OnInit {
   data: any = {};
   arr: any = [];
+  servicesArr: any = [];
+  servicesArrInt: any = [];
   subscription: any;
 
   // status: boolean;
@@ -24,8 +27,10 @@ export class DashBoardComponent implements OnInit {
     if (this.sub.sub === undefined) {
       this.sub.status = false;
     } else {
-      this.subscription = this.sub.sub;
-      this.sub.status = true;
+      this.subscription = this.sub.sub; // the subscription that was selected in the subscription component
+      this.getServicesArr(this.subscription.name);
+
+      // this.servicesArr = this.sub.subService;
     }
 
     this.apollo.getUser(this.currentUser).subscribe(
@@ -35,6 +40,33 @@ export class DashBoardComponent implements OnInit {
         console.log(res.data);
         this.data = res.data.oneUser;
         this.arr = this.data.userSubscription;
+
+        this.getServicesArrInt(this.arr[0].name);
+      },
+      err => {
+        console.log(err);
+      }
+    );
+  }
+  getServicesArrInt(subName) {
+    this.apollo.getSubscription(subName).subscribe(
+      res => {
+        console.log(this.sub.status, "im here and here ");
+
+        this.servicesArrInt = res.data.oneSubscription.service;
+        console.log(this.servicesArrInt);
+      },
+      err => {
+        console.log(err);
+      }
+    );
+  }
+  getServicesArr(subName) {
+    this.apollo.getSubscription(subName).subscribe(
+      res => {
+        this.servicesArr = res.data.oneSubscription.service;
+
+        console.log(this.servicesArr);
       },
       err => {
         console.log(err);

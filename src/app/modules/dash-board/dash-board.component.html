@@ -21,6 +21,13 @@
         </div>
       </div>
     </div>
+    <div class="col" *ngIf="sub.status">
+      <div class="row m-5">
+        <div class="col shadow" *ngFor="let item of servicesArr; index as i">
+          <h5>Service Name PPPP : {{ item.name }}</h5>
+        </div>
+      </div>
+    </div>
 
     <ng-template #g>
       <div class="col">
@@ -38,6 +45,16 @@
               For more information click the button below
             </p>
             <p>welcom : {{ sub.status }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="row m-5">
+          <div
+            class="col shadow"
+            *ngFor="let item of servicesArrInt; index as i"
+          >
+            <h5>Service Name : {{ item.name }}</h5>
           </div>
         </div>
       </div>
