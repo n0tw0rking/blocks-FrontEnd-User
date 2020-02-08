@@ -26,6 +26,11 @@
         <div class="col shadow" *ngFor="let item of servicesArr; index as i">
           <h5>Service Name : {{ item.name }}</h5>
         </div>
+        <div class="row m-5">
+          <div class="col shadow" *ngFor="let item of messagesArr; index as i">
+            <h5>message {{ i + 1 }} : {{ item.message }}</h5>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -55,6 +60,14 @@
             *ngFor="let item of servicesArrInt; index as i"
           >
             <h5>Service Name : {{ item.name }}</h5>
+          </div>
+        </div>
+        <div class="row m-5">
+          <div
+            class="col shadow"
+            *ngFor="let item of messagesArrInt; index as i"
+          >
+            <h5>message {{ i + 1 }} : {{ item.message }}</h5>
           </div>
         </div>
       </div>

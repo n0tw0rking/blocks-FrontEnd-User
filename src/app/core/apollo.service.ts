@@ -73,6 +73,10 @@ export class ApolloService {
               _id
               name
             }
+            userMesg {
+              _id
+              message
+            }
           }
         }
       `,
