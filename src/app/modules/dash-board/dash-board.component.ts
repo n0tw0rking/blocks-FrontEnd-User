@@ -13,6 +13,8 @@ export class DashBoardComponent implements OnInit {
   arr: any = [];
   servicesArr: any = [];
   servicesArrInt: any = [];
+  messagesArr: any = [];
+  messagesArrInt: any = [];
   subscription: any;
 
   // status: boolean;
@@ -20,7 +22,7 @@ export class DashBoardComponent implements OnInit {
   constructor(
     private apollo: ApolloService,
     private auth: AuthService,
-    private sub: SubscriptionService
+    public sub: SubscriptionService
   ) {}
 
   ngOnInit() {
@@ -54,7 +56,9 @@ export class DashBoardComponent implements OnInit {
         console.log(this.sub.status, "im here and here ");
 
         this.servicesArrInt = res.data.oneSubscription.service;
+        this.messagesArrInt = res.data.oneSubscription.userMesg;
         console.log(this.servicesArrInt);
+        console.log(res.data.oneSubscription);
       },
       err => {
         console.log(err);
@@ -65,7 +69,7 @@ export class DashBoardComponent implements OnInit {
     this.apollo.getSubscription(subName).subscribe(
       res => {
         this.servicesArr = res.data.oneSubscription.service;
-
+        this.messagesArr = res.data.oneSubscription.userMesg;
         console.log(this.servicesArr);
       },
       err => {
