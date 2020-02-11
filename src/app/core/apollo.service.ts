@@ -11,7 +11,7 @@ export class ApolloService {
   getUser(currentUser): any {
     return this.apollo.watchQuery<any>({
       query: gql`
-        query($id: String!) {
+        query oneUser($id: String!) {
           oneUser(id: $id) {
             _id
             isAdmin
@@ -62,7 +62,7 @@ export class ApolloService {
   getSubscription(subName): any {
     return this.apollo.watchQuery<any>({
       query: gql`
-        query($name: String!) {
+        query getSubscription($name: String!) {
           oneSubscription(name: $name) {
             _id
 
@@ -90,7 +90,7 @@ export class ApolloService {
   getBlockSubs(blockName) {
     return this.apollo.watchQuery<any>({
       query: gql`
-        query($name: String!) {
+        query getBlockSubs($name: String!) {
           oneBlockSubs(name: $name) {
             _id
             name

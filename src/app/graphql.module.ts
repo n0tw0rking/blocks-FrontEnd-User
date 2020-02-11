@@ -9,13 +9,13 @@ import { setContext } from "apollo-link-context";
 const uri = "http://localhost:4000/graphql"; // <-- add the URL of the GraphQL server here
 
 const token = localStorage.getItem("token");
-// const token =
-//   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZTMyY2Y2YzY0MTg3MDU2NDNjOWE1YjMiLCJlbWFpbCI6InN1cGVyQWRtaW4iLCJpc0FkbWluIjpmYWxzZSwiaXNTdXBlckFkbWluIjp0cnVlLCJpYXQiOjE1ODA1NTQ0MzgsImV4cCI6MTU4MDU3MjQzOH0.jRFZg08BMIkFplR3z-TuON4vC0Mu0lcbaPlgYGdBnZM';
+
 export function provideApollo(httpLink: HttpLink, apollo: Apollo) {
   const basic = setContext((operation, context) => ({
     headers: {
       Accept: "charset=utf-8"
-    }
+    },
+    method: "GET"
   }));
 
   const auth = setContext((operation, context) => ({
@@ -31,7 +31,8 @@ export function provideApollo(httpLink: HttpLink, apollo: Apollo) {
     cache: new InMemoryCache(),
     defaultOptions: {
       watchQuery: {
-        errorPolicy: "all"
+        errorPolicy: "all",
+        useGETForQueries: true
       }
     }
   };

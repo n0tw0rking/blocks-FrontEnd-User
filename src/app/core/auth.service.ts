@@ -38,7 +38,7 @@ export class AuthService {
     return this.apollo
       .watchQuery<any>({
         query: gql`
-          query($email: String!, $password: String!) {
+          query login($email: String!, $password: String!) {
             login(userInput: { email: $email, password: $password }) {
               token
               userId
