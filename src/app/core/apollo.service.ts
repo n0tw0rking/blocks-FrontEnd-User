@@ -44,7 +44,7 @@ export class ApolloService {
   getService(serviceNAme): any {
     return this.apollo.watchQuery<any>({
       query: gql`
-        query($name: String!) {
+        query oneService($name: String!) {
           oneService(name: $name) {
             _id
             subscriptionId {
