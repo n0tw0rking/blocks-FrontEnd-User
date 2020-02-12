@@ -16,8 +16,16 @@ export class MainPageComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.http.gimmeJokes().subscribe(res => {
-      this.joke = res;
-    });
+    // this.http.gimmeJokes().subscribe(res => {
+    //   this.joke = res;
+    // });
+    this.apollo.createBlock().subscribe(
+      res => {
+        console.log(res.data);
+      },
+      err => {
+        console.log(err);
+      }
+    );
   }
 }

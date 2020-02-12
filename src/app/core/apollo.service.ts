@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Apollo } from "apollo-angular";
 import gql from "graphql-tag";
+import { create } from "domain";
 
 @Injectable({
   providedIn: "root"
@@ -102,5 +103,20 @@ export class ApolloService {
       },
       errorPolicy: "all"
     }).valueChanges;
+  }
+
+  createBlock() {
+    return this.apollo.use("mute").mutate<any>({
+      mutation: gql`
+        mutation createService {
+          createService(name: "KKKKK") {
+            _id
+            name
+          }
+        }
+      `,
+      variables: {},
+      errorPolicy: "all"
+    });
   }
 }

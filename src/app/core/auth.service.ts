@@ -97,7 +97,7 @@ export class AuthService {
     return this.apollo
       .watchQuery<any>({
         query: gql`
-          query {
+          query isAuth {
             isAuth
           }
         `,
@@ -121,7 +121,7 @@ export class AuthService {
   public isAuthSuperAndAdmin(): any {
     return this.apollo.watchQuery<any>({
       query: gql`
-          query {
+          query isSuperIsAdmin {
             isSuperIsAdmin(id: "${localStorage.getItem("currentUser")}") {
               isAdmin
               isSuperAdmin

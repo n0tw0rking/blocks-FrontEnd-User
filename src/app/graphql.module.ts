@@ -6,7 +6,8 @@ import { InMemoryCache } from "apollo-cache-inmemory";
 import { ApolloLink } from "apollo-link";
 import { setContext } from "apollo-link-context";
 
-const uri = "http://localhost:4000/graphql"; // <-- add the URL of the GraphQL server here
+// const uri = "http://localhost:4000/graphql"; // <-- add the URL of the GraphQL server here
+const uri = "https://blocks-backend.herokuapp.com/graphql";
 
 const token = localStorage.getItem("token");
 
@@ -31,8 +32,7 @@ export function provideApollo(httpLink: HttpLink, apollo: Apollo) {
     cache: new InMemoryCache(),
     defaultOptions: {
       watchQuery: {
-        errorPolicy: "all",
-        useGETForQueries: true
+        errorPolicy: "all"
       }
     }
   };
@@ -48,4 +48,11 @@ export function provideApollo(httpLink: HttpLink, apollo: Apollo) {
     }
   ]
 })
-export class GraphQLModule {}
+export class GraphQLModule {
+  constructor(public apollo: Apollo, public httpLink: HttpLink) {
+    this.apollo.createNamed("mute", {
+      link: this.httpLink.create({ uri }),
+      cache: new InMemoryCache()
+    });
+  }
+}
