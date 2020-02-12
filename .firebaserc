@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "uniblocks-c0898"
+  },
+  "targets": {
+    "uniblocks-c0898": {
+      "hosting": {
+        "blocks-FrontEnd-Users": [
+          "uniblocks-c0898"
+        ]
+      }
+    }
+  }
+}
