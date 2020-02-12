@@ -1,51 +1,35 @@
 import { NgModule } from "@angular/core";
 import { ApolloModule, APOLLO_OPTIONS, Apollo } from "apollo-angular";
-import { HttpLinkModule, HttpLink } from "apollo-angular-link-http";
 import { HttpClientModule } from "@angular/common/http";
+import { HttpLinkModule, HttpLink } from "apollo-angular-link-http";
 import { InMemoryCache } from "apollo-cache-inmemory";
-import { ApolloLink } from "apollo-link";
-import { setContext } from "apollo-link-context";
-
-const uri = "http://localhost:4000/graphql"; // <-- add the URL of the GraphQL server here
-
+// const uri = "https://hotgraphapi20200206111431.azurewebsites.net/";
+// const uri1 = "https://blocks-backend.herokuapp.com/graphql";
 const token = localStorage.getItem("token");
-
-export function provideApollo(httpLink: HttpLink, apollo: Apollo) {
-  const basic = setContext((operation, context) => ({
-    headers: {
-      Accept: "charset=utf-8"
-    },
-    method: "GET"
-  }));
-
-  const auth = setContext((operation, context) => ({
-    headers: {
-      Authorization: `Bearer ${token}` || ""
-    }
-  }));
-
-  const link = ApolloLink.from([basic, auth, httpLink.create({ uri })]);
-
-  return {
-    link,
-    cache: new InMemoryCache(),
-    defaultOptions: {
-      watchQuery: {
-        errorPolicy: "all",
-        useGETForQueries: true
-      }
-    }
-  };
-}
-
+/*
+ IMPORTANT NOTE :
+ TOKEN INTERCEPTOR IS TAKING CARE OF THE TOKEN INJECTION.
+*/
 @NgModule({
-  exports: [ApolloModule, HttpLinkModule, HttpClientModule],
-  providers: [
-    {
-      provide: APOLLO_OPTIONS,
-      useFactory: provideApollo,
-      deps: [HttpLink]
-    }
-  ]
+  exports: [ApolloModule, HttpLinkModule, HttpClientModule]
 })
-export class GraphQLModule {}
+export class GraphQLModule {
+  private uri2 = "https://hotgraphapi20200206111431.azurewebsites.net";
+  private uri1 = "https://blocks-backend.herokuapp.com/graphql";
+
+  constructor(public apollo: Apollo, public httpLink: HttpLink) {
+    const options1: any = {
+      uri: this.uri1
+    };
+    this.apollo.createDefault({
+      link: this.httpLink.create(options1),
+      cache: new InMemoryCache()
+    });
+
+    const options2: any = { uri: this.uri2 };
+    this.apollo.createNamed("ASP", {
+      link: this.httpLink.create(options2),
+      cache: new InMemoryCache()
+    });
+  }
+}
