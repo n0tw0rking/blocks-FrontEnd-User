@@ -1,0 +1,35 @@
+<ul class="navbar-nav mr-auto float-left">
+  <!-- This is  -->
+  <li class="nav-item hidden-sm-up">
+    <a (click)="toggleSidebar.emit()" class="nav-link nav-toggler waves-effect waves-light" style="cursor: pointer;">
+      <i class="ti-menu"></i>
+    </a>
+  </li>
+  <li class="text-center">{{tittle}}</li>
+</ul>
+<ul class="navbar-nav float-right">
+  <!-- ============================================================== -->
+  <!-- User profile and search -->
+  <!-- ============================================================== -->
+  <li class="nav-item" ngbDropdown placement="bottom-right">
+    <a ngbDropdownToggle class="nav-link text-muted waves-effect waves-dark" href="javascript: void(0)"
+      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <img src="../../../../assets/images/logo-text.png" alt="user" class="img-circle" width="30">
+    </a>
+    <div class="dropdown-menu-right user-dd animated flipInY" ngbDropdownMenu>
+      <a class="dropdown-item" href="#">
+        <i class="ti-user m-r-5 m-l-5"></i> My Profile</a>
+      <a class="dropdown-item" href="#">
+        <i class="ti-wallet m-r-5 m-l-5"></i> My Balance</a>
+      <a class="dropdown-item" href="#">
+        <i class="ti-email m-r-5 m-l-5"></i> Inbox</a>
+      <div class="dropdown-divider"></div>
+      <a class="dropdown-item" href="#">
+        <i class="ti-settings m-r-5 m-l-5"></i> Account Setting</a>
+      <div class="dropdown-divider"></div>
+      <a class="dropdown-item" (click)="logout()" style="cursor: pointer">
+        <i class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
+      <div class="dropdown-divider"></div>
+    </div>
+  </li>
+</ul>

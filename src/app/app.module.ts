@@ -21,7 +21,26 @@ import { ServiceWorkerModule } from "@angular/service-worker";
 import { environment } from "../environments/environment";
 import { HttpService } from "./core/http.service";
 import { HomeComponent } from "./modules/home/home.component";
-
+import { SidebarComponent } from "./modules/shared/sidebar/sidebar.component";
+import { NavigationComponent } from "./modules/shared/header-navigation/navigation.component";
+import { BreadcrumbComponent } from "./modules/shared/breadcrumb/breadcrumb.component";
+import {
+  CommonModule,
+  LocationStrategy,
+  PathLocationStrategy
+} from "@angular/common";
+import {
+  PerfectScrollbarModule,
+  PERFECT_SCROLLBAR_CONFIG,
+  PerfectScrollbarConfigInterface
+} from "ngx-perfect-scrollbar";
+const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
+  suppressScrollX: true,
+  wheelSpeed: 2,
+  wheelPropagation: true
+};
+import * as $ from "jquery";
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +49,11 @@ import { HomeComponent } from "./modules/home/home.component";
     MainPageComponent,
     NavbarComponent,
     SubscriptionComponent,
-    HomeComponent
+    HomeComponent,
+    SidebarComponent,
+    SidebarComponent,
+    NavigationComponent,
+    BreadcrumbComponent
   ],
   imports: [
     BrowserModule,
@@ -40,6 +63,7 @@ import { HomeComponent } from "./modules/home/home.component";
     HttpClientModule,
     BrowserAnimationsModule,
     GraphQLModule,
+    NgbModule.forRoot(),
     ServiceWorkerModule.register("ngsw-worker.js", {
       enabled: environment.production
     })

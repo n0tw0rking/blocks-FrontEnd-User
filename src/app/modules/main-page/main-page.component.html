@@ -1,4 +1,91 @@
-<h1>! Hello World</h1>
+<!-- <div class="wrapper">
+  <div class="main">
+    UNI <div id="Blocks">Blocks</div>
+  </div>
+  <div #rendererContainer id="canvas"></div>
+</div> -->
+<!-- ============================================================== -->
+<!-- Main wrapper - style you can find in pages.scss -->
+<!-- ============================================================== -->
+<div
+  id="main-wrapper"
+  class="fixed-sidebar fixed-header skin-default-dark"
+  [ngClass]="{
+    'show-sidebar': showMobileMenu,
+    'mini-sidebar': addMiniSidebar,
+    'lock-nav': lockSidebar
+  }"
+>
+  <!-- ============================================================== -->
+  <!-- Topbar header - style you can find in topbar.scss -->
+  <!-- ============================================================== -->
+  <!-- ============================================================== -->
+  <!-- Topbar header - style you can find in pages.scss -->
+  <!-- ============================================================== -->
 
-<h1>joke</h1>
-<p *ngIf="joke">{{ joke.value }}</p>
+  <!-- ============================================================== -->
+  <!-- Left Sidebar - style you can find in sidebar.scss  -->
+  <!-- ============================================================== -->
+  <aside class="left-sidebar">
+    <div class="d-flex no-block nav-text-box align-items-center">
+      <a
+        (click)="lockSidebar = !lockSidebar"
+        class="nav-lock waves-effect waves-dark ml-auto hidden-md-down"
+        href="javascript:void(0)"
+      >
+        <i
+          class="mdi"
+          [ngClass]="
+            lockSidebar ? 'mdi-toggle-switch-off' : 'mdi-toggle-switch'
+          "
+        ></i>
+      </a>
+      <a
+        (click)="showMobileMenu = false"
+        class="nav-toggler waves-effect waves-dark ml-auto hidden-sm-up"
+        href="javascript:void(0)"
+      >
+        <i class="ti-close"></i>
+      </a>
+    </div>
+    <!-- Sidebar scroll-->
+    <div class="scroll-sidebar" [perfectScrollbar]="config">
+      <app-sidebar></app-sidebar>
+    </div>
+    <!-- End Sidebar scroll-->
+  </aside>
+  <!-- ============================================================== -->
+  <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+  <!-- ============================================================== -->
+  <!-- ============================================================== -->
+  <!-- Page wrapper  -->
+  <!-- ============================================================== -->
+  <div class="page-wrapper" [ngStyle]="{ 'min-height': height }">
+    <!-- ============================================================== -->
+    <!-- Container fluid  -->
+    <!-- ============================================================== -->
+    <div class=" container-fluid">
+      <app-breadcrumb></app-breadcrumb>
+      <!-- ============================================================== -->
+      <!-- Start Page Content -->
+      <!-- ============================================================== -->
+      <router-outlet></router-outlet>
+      <!-- ============================================================== -->
+      <!-- End Start Page Content -->
+      <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Container fluid  -->
+    <!-- ============================================================== -->
+  </div>
+  <!-- ============================================================== -->
+  <!-- End Page wrapper  -->
+  <!-- ============================================================== -->
+  <!-- ============================================================== -->
+  <!-- footer -->
+  <!-- ============================================================== -->
+  <footer class="footer"></footer>
+  <!-- ============================================================== -->
+  <!-- End footer -->
+  <!-- ============================================================== -->
+</div>
