@@ -86,9 +86,12 @@
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
             "assets": [
-              "src/favicon.ico",
+              "src/favicon.ico", <<
+              << << < HEAD "src/assets" ===
+              === =
               "src/assets",
-              "src/manifest.webmanifest"
+              "src/manifest.webmanifest" >>>
+              >>> > 633 d0170675fd7575cc7fa2bf8b0f5a37ea37b37
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
