@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "blocks-1ca4e"
+  },
+  "targets": {
+    "blocks-1ca4e": {
+      "hosting": {
+        "blocks-FrontEnd-Users": [
+          "blocks-1ca4e"
+        ]
+      }
+    }
+  }
+}

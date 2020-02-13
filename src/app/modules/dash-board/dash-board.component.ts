@@ -20,7 +20,7 @@ export class DashBoardComponent implements OnInit {
   constructor(
     private apollo: ApolloService,
     private auth: AuthService,
-    private sub: SubscriptionService
+    public sub: SubscriptionService
   ) {}
 
   ngOnInit() {
