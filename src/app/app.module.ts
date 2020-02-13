@@ -20,6 +20,8 @@ import { SubscriptionComponent } from "./modules/subscription/subscription.compo
 import { ServiceWorkerModule } from "@angular/service-worker";
 import { environment } from "../environments/environment";
 import { HttpService } from "./core/http.service";
+import { HomeComponent } from "./modules/home/home.component";
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +29,8 @@ import { HttpService } from "./core/http.service";
     DashBoardComponent,
     MainPageComponent,
     NavbarComponent,
-    SubscriptionComponent
+    SubscriptionComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
