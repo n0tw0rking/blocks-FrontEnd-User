@@ -17,6 +17,9 @@ import { ApolloService } from "./core/apollo.service";
 import { AuthGuard } from "./core/auth.guard";
 import { NavbarComponent } from "./modules/navbar/navbar.component";
 import { SubscriptionComponent } from "./modules/subscription/subscription.component";
+import { ServiceWorkerModule } from "@angular/service-worker";
+import { environment } from "../environments/environment";
+import { HttpService } from "./core/http.service";
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,13 +36,17 @@ import { SubscriptionComponent } from "./modules/subscription/subscription.compo
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    GraphQLModule
+    GraphQLModule,
+    ServiceWorkerModule.register("ngsw-worker.js", {
+      enabled: environment.production
+    })
   ],
   providers: [
     ApolloService,
     SubscriptionService,
     AuthService,
     AuthGuard,
+    HttpService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
