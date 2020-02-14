@@ -1,0 +1,76 @@
+<div class="container">
+  <div class="row">
+    <div class="col" *ngIf="sub.status; else g">
+      <div class="card" style="width: 18rem;">
+        <img
+          class="card-img-top"
+          src="https://previews.123rf.com/images/panyamail/panyamail1809/panyamail180900343/109879063-user-avatar-icon-sign-profile-symbol.jpg"
+          alt="Card image cap"
+        />
+        <div class="card-body">
+          <h5 class="card-title">Sub Name : {{ subscription?.name }}</h5>
+          <h5 class="card-title">
+            Block Name : {{ subscription?.block.name }}
+          </h5>
+          <h5 class="card-title">
+            Location : {{ subscription?.block.location }}
+          </h5>
+          <p class="card-text">
+            For more information click the button below
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col" *ngIf="sub.status">
+      <div class="row m-5">
+        <div class="col shadow" *ngFor="let item of servicesArr; index as i">
+          <h5>Service Name : {{ item.name }}</h5>
+        </div>
+        <div class="row m-5">
+          <div class="col shadow" *ngFor="let item of messagesArr; index as i">
+            <h5>message {{ i + 1 }} : {{ item.message }}</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #g>
+      <div class="col">
+        <div class="card" style="width: 18rem;">
+          <img
+            class="card-img-top"
+            src="https://previews.123rf.com/images/panyamail/panyamail1809/panyamail180900343/109879063-user-avatar-icon-sign-profile-symbol.jpg"
+            alt="Card image cap"
+          />
+          <div class="card-body">
+            <h5 class="card-title">Sub Name : {{ arr[0]?.name }}</h5>
+            <h5 class="card-title">Block Name : {{ arr[0]?.block.name }}</h5>
+            <h5 class="card-title">Location : {{ arr[0]?.block.location }}</h5>
+            <p class="card-text">
+              For more information click the button below
+            </p>
+            <p>welcom : {{ sub.status }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="row m-5">
+          <div
+            class="col shadow"
+            *ngFor="let item of servicesArrInt; index as i"
+          >
+            <h5>Service Name : {{ item.name }}</h5>
+          </div>
+        </div>
+        <div class="row m-5">
+          <div
+            class="col shadow"
+            *ngFor="let item of messagesArrInt; index as i"
+          >
+            <h5>message {{ i + 1 }} : {{ item.message }}</h5>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+</div>

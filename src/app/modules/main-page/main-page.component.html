@@ -1,0 +1,57 @@
+<!-- <div class="wrapper">
+  <div class="main">
+    UNI <div id="Blocks">Blocks</div>
+  </div>
+  <div #rendererContainer id="canvas"></div>
+</div> -->
+<!-- ============================================================== -->
+<!-- Main wrapper - style you can find in pages.scss -->
+<!-- ============================================================== -->
+<div
+  id="main-wrapper"
+  class="fixed-sidebar fixed-header skin-default-dark"
+  [ngClass]="{
+    'show-sidebar': showMobileMenu,
+    'mini-sidebar': addMiniSidebar,
+    'lock-nav': lockSidebar
+  }"
+>
+  <aside class="left-sidebar">
+    <div class="d-flex no-block nav-text-box align-items-center">
+      <a
+        (click)="lockSidebar = !lockSidebar"
+        class="nav-lock waves-effect waves-dark ml-auto hidden-md-down"
+        href="javascript:void(0)"
+      >
+        <i
+          class="mdi"
+          [ngClass]="
+            lockSidebar ? 'mdi-toggle-switch-off' : 'mdi-toggle-switch'
+          "
+        ></i>
+      </a>
+      <a
+        (click)="showMobileMenu = false"
+        class="nav-toggler waves-effect waves-dark ml-auto hidden-sm-up"
+        href="javascript:void(0)"
+      >
+        <i class="ti-close"></i>
+      </a>
+    </div>
+    <!-- Sidebar scroll-->
+    <div class="scroll-sidebar" [perfectScrollbar]="config">
+      <app-sidebar></app-sidebar>
+    </div>
+    <!-- End Sidebar scroll-->
+  </aside>
+
+  <div class="page-wrapper" [ngStyle]="{ 'min-height': height }">
+    <div class=" container-fluid">
+      <app-breadcrumb></app-breadcrumb>
+
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+
+  <footer class="footer"></footer>
+</div>

@@ -1,0 +1,88 @@
+<!-- Header Part -->
+<!--  I might need to bring the nav bar here -->
+<header class="topbar">
+  <nav class="navbar top-navbar navbar-expand-md navbar-dark">
+    <!-- ============================================================== -->
+    <!-- Logo -->
+    <!-- ============================================================== -->
+    <div class="navbar-header">
+      <a class="navbar-brand" href [routerLink]="['/']">
+        <!-- Logo icon -->
+        <b>
+          <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
+          <!-- Dark Logo icon -->
+          <i class="wi wi-sunset"></i>
+          <!-- <i alt="homepage" class="dark-logo"></i> -->
+
+          <!-- Light Logo icon -->
+        </b>
+
+        <!--End Logo icon -->
+        <!-- Logo text -->
+        <!-- <span [ngClass]="{ 'd-none': hideLogoText }"> -->
+        <!-- dark Logo text -->
+        <a alt="homepage" style="color: #000; text-align: center;">[UNI]</a>
+        <!-- Light Logo text -->
+        <a alt="homepage" style="color:blue; text-align: center;">Blocks</a>
+        <!-- </span> -->
+      </a>
+    </div>
+    <div class="" *ngIf="!isLogin()">
+      <div class="row">
+        <form class="form-control-cd-10" style="padding-left:5% ;">
+          <input type="text" class="form-control text-align: center" placeholder="Search..." />
+        </form>
+        <button class="btn-primary"><i class="ti-search"></i>search</button>
+        <a href="" class="btn">search</a>
+      </div>
+
+      <div class="" *ngIf="!isAuth">
+        <a [routerLink]="['/login']" class="btn">login</a>
+      </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Logo -->
+    <!-- ============================================================== -->
+
+    <div class="navbar-collapse">
+      <!-- <app-navigation (toggleSidebar)="toggleSidebar()" (isLogin)="isLogin()" (isMain)="isMain()" class=" w-100">
+      </app-navigation> -->
+    </div>
+  </nav>
+</header>
+<!--  End of Header -->
+<ul class="navbar-nav mr-auto float-left">
+  <!-- This is  -->
+  <li class="nav-item hidden-sm-up">
+    <a (click)="toggleSidebar.emit()" class="nav-link nav-toggler waves-effect waves-light" style="cursor: pointer;">
+      <i class="ti-menu"></i>
+    </a>
+  </li>
+  <li class="text-center">{{tittle}}</li>
+</ul>
+<ul class="navbar-nav float-right">
+  <!-- ============================================================== -->
+  <!-- User profile and search -->
+  <!-- ============================================================== -->
+  <li class="nav-item" ngbDropdown placement="bottom-right">
+    <a ngbDropdownToggle class="nav-link text-muted waves-effect waves-dark" href="javascript: void(0)"
+      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <img src="../../../../assets/images/logo-text.png" alt="user" class="img-circle" width="30">
+    </a>
+    <div class="dropdown-menu-right user-dd animated flipInY" ngbDropdownMenu>
+      <a class="dropdown-item" href="#">
+        <i class="ti-user m-r-5 m-l-5"></i> My Profile</a>
+      <a class="dropdown-item" href="#">
+        <i class="ti-wallet m-r-5 m-l-5"></i> My Balance</a>
+      <a class="dropdown-item" href="#">
+        <i class="ti-email m-r-5 m-l-5"></i> Inbox</a>
+      <div class="dropdown-divider"></div>
+      <a class="dropdown-item" href="#">
+        <i class="ti-settings m-r-5 m-l-5"></i> Account Setting</a>
+      <div class="dropdown-divider"></div>
+      <a class="dropdown-item" (click)="logout()" style="cursor: pointer">
+        <i class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
+      <div class="dropdown-divider"></div>
+    </div>
+  </li>
+</ul>
