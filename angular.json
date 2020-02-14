@@ -1,5 +1,4 @@
 {
-  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
@@ -85,14 +84,7 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
-            "assets": [
-              "src/favicon.ico", <<
-              << << < HEAD "src/assets" ===
-              === =
-              "src/assets",
-              "src/manifest.webmanifest" >>>
-              >>> > 633 d0170675fd7575cc7fa2bf8b0f5a37ea37b37
-            ],
+            "assets": ["src/assets", "src/manifest.webmanifest"],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"

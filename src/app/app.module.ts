@@ -64,6 +64,7 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
     BrowserAnimationsModule,
     GraphQLModule,
     NgbModule.forRoot(),
+    PerfectScrollbarModule,
     ServiceWorkerModule.register("ngsw-worker.js", {
       enabled: environment.production
     })

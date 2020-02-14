@@ -9,7 +9,7 @@ export class ApolloService {
   constructor(private apollo: Apollo) {}
 
   getUser(currentUser): any {
-    return this.apollo.watchQuery<any>({
+    return this.apollo.use("ASP").watchQuery<any>({
       query: gql`
         query oneUser($id: String!) {
           oneUser(id: $id) {
@@ -39,28 +39,59 @@ export class ApolloService {
       errorPolicy: "all"
     }).valueChanges;
   }
-
-  getService(serviceNAme): any {
-    return this.apollo.watchQuery<any>({
+  updateServiceById(serviceId, state) {
+    return this.apollo.use("ASP").mutate<any>({
+      mutation: gql`
+        mutation($inputServiceId: Int!, $stateInput: Boolean!) {
+          updateServiceState(
+            inputServiceId: $inputServiceId
+            stateInput: $stateInput
+          )
+        }
+      `,
+      variables: {
+        inputServiceId: serviceId,
+        stateInput: state
+      },
+      errorPolicy: "all"
+    });
+  }
+  // getService(serviceNAme): any {
+  //   return this.apollo.use("ASP").watchQuery<any>({
+  //     query: gql`
+  //       query($name: String!) {
+  //         oneService(name: $name) {
+  //           _id
+  //           subscriptionId {
+  //             _id
+  //           }
+  //         }
+  //       }
+  //     `,
+  //     variables: {
+  //       name: serviceNAme
+  //     },
+  //     errorPolicy: "all"
+  //   }).valueChanges;
+  // }
+  getServiceById(serviceId) {
+    return this.apollo.use("ASP").watchQuery<any>({
       query: gql`
-        query($name: String!) {
-          oneService(name: $name) {
-            _id
-            subscriptionId {
-              _id
-            }
+        query($serviceId: Int!) {
+          service(serviceId: $serviceId) {
+            isActive
+            aServiceName
           }
         }
       `,
       variables: {
-        name: serviceNAme
+        serviceId: serviceId
       },
       errorPolicy: "all"
     }).valueChanges;
   }
-
   getSubscription(subName): any {
-    return this.apollo.watchQuery<any>({
+    return this.apollo.use("ASP").watchQuery<any>({
       query: gql`
         query getSubscription($name: String!) {
           oneSubscription(name: $name) {
@@ -88,7 +119,7 @@ export class ApolloService {
   }
 
   getBlockSubs(blockName) {
-    return this.apollo.watchQuery<any>({
+    return this.apollo.use("ASP").watchQuery<any>({
       query: gql`
         query getBlockSubs($name: String!) {
           oneBlockSubs(name: $name) {

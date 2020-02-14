@@ -3,8 +3,6 @@ import { ApolloModule, APOLLO_OPTIONS, Apollo } from "apollo-angular";
 import { HttpClientModule } from "@angular/common/http";
 import { HttpLinkModule, HttpLink } from "apollo-angular-link-http";
 import { InMemoryCache } from "apollo-cache-inmemory";
-// const uri = "https://hotgraphapi20200206111431.azurewebsites.net/";
-// const uri1 = "https://blocks-backend.herokuapp.com/graphql";
 const token = localStorage.getItem("token");
 /*
  IMPORTANT NOTE :

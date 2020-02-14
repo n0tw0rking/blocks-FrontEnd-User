@@ -5,6 +5,7 @@ import {
   Output,
   Input
 } from "@angular/core";
+
 import { Location } from "@angular/common";
 import { Router } from "@angular/router";
 import {
@@ -22,6 +23,7 @@ declare var $: any;
   templateUrl: "./navigation.component.html"
 })
 export class NavigationComponent implements AfterViewInit {
+  isAuthed: boolean;
   tittle = "";
   @Output()
   toggleSidebar = new EventEmitter<void>();
@@ -109,6 +111,7 @@ export class NavigationComponent implements AfterViewInit {
   }
   logout() {
     this.authService.logout();
+    this.isAuthed = this.authService.isAuthed;
   }
   isMain() {
     if (this.router.url == "/main") {
@@ -119,9 +122,12 @@ export class NavigationComponent implements AfterViewInit {
   }
   isLogin() {
     if (this.router.url == "/login") {
-      console.log(this.router.url);
       return true;
     }
     return false;
+  }
+  onLogin() {
+    this.isAuthed = this.authService.isAuthed;
+    return this.isAuthed;
   }
 }

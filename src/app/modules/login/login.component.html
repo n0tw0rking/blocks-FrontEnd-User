@@ -1,22 +1,16 @@
-<div class="container  mt-5 shadow w-50 ">
+<div class="container  mt-5 shadow w-50 " *ngIf="!submitted">
   <div class="row ">
     <div class="col m-3">
-      <div class="alert alert-success" *ngIf="notifyMessage">
-        {{ notifyMessage }}
+      <div class="alert alert-danger" *ngIf="errors">
+        {{ errors }}
       </div>
       <div id="form">
         <h2>Login</h2>
         <form [formGroup]="loginForm" (ngSubmit)="login()">
           <div class="form-group">
             <label for="email">Email</label>
-            <input
-              type="email"
-              class="form-control"
-              id="email"
-              aria-describedby="email"
-              placeholder="email@local.com"
-              formControlName="email"
-            />
+            <input type="email" class="form-control" id="email" aria-describedby="email" placeholder="email@local.com"
+              formControlName="email" />
             <div *ngIf="isInvalidForm('email')" class="alert alert-danger">
               <div *ngIf="isRequired('email')">
                 Email is required.
@@ -28,26 +22,20 @@
           </div>
           <div class="form-group">
             <label for="password">Password</label>
-            <input
-              type="password"
-              class="form-control"
-              id="password"
-              placeholder="Password"
-              formControlName="password"
-              minlength="6"
-            />
+            <input type="password" class="form-control" id="password" placeholder="Password" formControlName="password"
+              minlength="6" required />
           </div>
           <button type="submit" class="btn btn-primary">
             login
           </button>
         </form>
-        <div *ngIf="errors.length > 0" class="alert alert-danger">
-          <p *ngFor="let error of errors">
-            {{ error.detail }}
-          </p>
-        </div>
       </div>
     </div>
   </div>
 </div>
-<!-- [disabled]="!loginForm.valid" -->
+
+<div class="text-center" *ngIf="submitted&&loading" style="vertical-align: middle;">
+  <div class="spinner-grow fast" style="width: 20rem; height: 20rem;" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
