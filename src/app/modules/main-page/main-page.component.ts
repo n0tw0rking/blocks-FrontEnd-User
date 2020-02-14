@@ -24,15 +24,15 @@ export class MainPageComponent implements OnInit {
     // this.http.gimmeJokes().subscribe(res => {
     //   this.joke = res;
     // });
-    this.subscribeToNotification();
-    this.apollo.createBlock().subscribe(
-      res => {
-        console.log(res.data);
-      },
-      err => {
-        console.log(err);
-      }
-    );
+    // this.subscribeToNotification();
+    // this.apollo.createBlock().subscribe(
+    //   res => {
+    //     console.log(res.data);
+    //   },
+    //   err => {
+    //     console.log(err);
+    //   }
+    // );
   }
   subscribeToNotification() {
     if (this.SwUpdate.isEnabled) {

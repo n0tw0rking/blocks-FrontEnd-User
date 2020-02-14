@@ -5,14 +5,17 @@ import { environment } from "../../environments/environment";
 import { map } from "rxjs/operators";
 import { Router } from "@angular/router";
 import { SubscriptionService } from "../core/subscription.service";
-// import { ApolloService } from "./apollo.service";
+import { ApolloService } from "./apollo.service";
 import { Apollo } from "apollo-angular";
 import gql from "graphql-tag";
+import { SwUpdate, SwPush } from "@angular/service-worker";
 
 @Injectable({
   providedIn: "root"
 })
 export class AuthService {
+  readonly VAPID_KEY =
+    "BIDKneMUisz3eBe-_YA5eA3qm_JAPv6Uz79IIWppgjakBOjpUQYK3E6BbBfcvQaGhKsnodIJ04VYrrvpv256erY";
   private user;
 
   private urlLogin = "http://localhost:4000/graphql";
@@ -27,7 +30,10 @@ export class AuthService {
     private http: HttpClient,
     private router: Router,
     private apollo: Apollo, // private apollo: ApolloService
-    private sub: SubscriptionService
+    private sub: SubscriptionService,
+    private apolloService: ApolloService,
+    private SwUpdate: SwUpdate,
+    private SwPush: SwPush
   ) {
     console.log(this.isAuthed);
     this.getIsAuthed.emit(this.isAuthed);
@@ -72,6 +78,24 @@ export class AuthService {
   public logout() {
     localStorage.removeItem("token");
     localStorage.removeItem("currentUser");
+    if (this.SwUpdate.isEnabled) {
+      this.SwPush.requestSubscription({
+        serverPublicKey: this.VAPID_KEY
+      }).then(sub => {
+        this.apolloService
+          .deleteNotificationSub(this.user, sub.endpoint)
+          .subscribe(
+            res => {
+              console.log(res);
+            },
+            err => {
+              console.log(err);
+            }
+          );
+      });
+    }
+    console.log(this.user);
+
     this.isAuthed = false;
     // this.sub.status = false;
     this.sub.sub = undefined;
