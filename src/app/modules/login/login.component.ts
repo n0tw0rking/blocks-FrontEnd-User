@@ -3,7 +3,8 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { AuthService } from "../../core/auth.service";
 import { Router, ActivatedRoute } from "@angular/router";
 import { ApolloService } from "../../core/apollo.service";
-
+import { SwUpdate, SwPush } from "@angular/service-worker";
+import { HttpService } from "../../core/http.service";
 @Component({
   selector: "app-login",
   templateUrl: "./login.component.html",
@@ -14,13 +15,17 @@ export class LoginComponent implements OnInit {
   errors: any = [];
   notifyMessage = "";
   public currentUser;
-
+  readonly VAPID_KEY =
+    "BIDKneMUisz3eBe-_YA5eA3qm_JAPv6Uz79IIWppgjakBOjpUQYK3E6BbBfcvQaGhKsnodIJ04VYrrvpv256erY";
   constructor(
     private formbuilder: FormBuilder,
     private auth: AuthService,
     private router: Router,
     private route: ActivatedRoute,
-    private apollo: ApolloService
+    private apollo: ApolloService,
+    private SwUpdate: SwUpdate,
+    private SwPush: SwPush,
+    private http: HttpService
   ) {}
 
   ngOnInit() {
@@ -59,6 +64,19 @@ export class LoginComponent implements OnInit {
     return this.loginForm.controls[fieldName].errors.required;
   }
 
+  subscribeToNotification() {
+    if (this.SwUpdate.isEnabled) {
+      this.SwPush.requestSubscription({
+        serverPublicKey: this.VAPID_KEY
+      }).then(sub => {
+        console.log(sub);
+        this.http.postSomething(sub).subscribe(res => {
+          console.log(res);
+        });
+      });
+    }
+  }
+
   login() {
     console.log(this.loginForm.value);
     this.auth.login(this.loginForm.value).subscribe(
@@ -74,10 +92,11 @@ export class LoginComponent implements OnInit {
               // console.log(res.data.oneUser.userSubscription);
 
               if (res.data.oneUser.userSubscription.length === 0) {
+                console.log("&&&&&&&&&&&&&&");
                 this.auth.logout();
               } else {
                 console.log(res.data);
-
+                this.subscribeToNotification();
                 this.router.navigate(["/dash"]);
               }
             },
