@@ -7,10 +7,13 @@ import { Router } from "@angular/router";
 // import { ApolloService } from "./apollo.service";
 import { Apollo } from "apollo-angular";
 import gql from "graphql-tag";
+
 @Injectable({
   providedIn: "root"
 })
 export class AuthService {
+  readonly VAPID_KEY =
+    "BIDKneMUisz3eBe-_YA5eA3qm_JAPv6Uz79IIWppgjakBOjpUQYK3E6BbBfcvQaGhKsnodIJ04VYrrvpv256erY";
   private user;
   public isAuthed = !!localStorage.getItem("currentUser");
   public isSuperAdmin: boolean;
@@ -20,7 +23,9 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private router: Router,
+
     private apollo: Apollo // private apollo: ApolloService
+
   ) {
     console.log(this.isAuthed);
     this.getIsAuthed.emit(this.isAuthed);
@@ -64,6 +69,24 @@ export class AuthService {
   public logout() {
     localStorage.removeItem("token");
     localStorage.removeItem("currentUser");
+    if (this.SwUpdate.isEnabled) {
+      this.SwPush.requestSubscription({
+        serverPublicKey: this.VAPID_KEY
+      }).then(sub => {
+        this.apolloService
+          .deleteNotificationSub(this.user, sub.endpoint)
+          .subscribe(
+            res => {
+              console.log(res);
+            },
+            err => {
+              console.log(err);
+            }
+          );
+      });
+    }
+    console.log(this.user);
+
     this.isAuthed = false;
     this.router.navigate(["/login"]);
     this.getIsAuthed.emit(this.isAuthed);
